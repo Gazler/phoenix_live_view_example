@@ -34,7 +34,7 @@ defmodule DemoWeb.UserLive.New do
          |> redirect(to: Routes.live_path(socket, UserLive.Show, user))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, changeset: changeset, avatar: user_params["upload"])}
+        {:noreply, assign(socket, changeset: changeset, avatar: user_params["avatar"])}
     end
   end
 end

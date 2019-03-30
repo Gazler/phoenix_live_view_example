@@ -22,9 +22,9 @@
   <%= error_tag f, :avatar %>
 
   <%= if assigns[:avatar] do %>
-    <h2><%= @avatar.filename %></h2>
-    <h2><%= @avatar.content_type %></h2>
-    <img src="data:<%= @avatar.content_type%>;base64, <%= File.read!(@avatar.path) |> Base.encode64() %>" />
+    <h2><%= @avatar["name"] %></h2>
+    <h2><%= @avatar["type"] %></h2>
+    <img src="data:<%= @avatar["type"] %>;base64, <%= File.read!(@avatar["path"]) |> Base.encode64() %>" />
   <% end %>
 
   <div>

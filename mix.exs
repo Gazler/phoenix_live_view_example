@@ -33,8 +33,8 @@ defmodule Demo.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.2"},
-      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view", branch: "gr-array-buffer"},
+      {:phoenix, github: "phoenixframework/phoenix", branch: "v1.4", override: true},
+      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view", branch: "gr-upload-channel"},
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.7"},
       {:phoenix_pubsub, "~> 1.1"},
