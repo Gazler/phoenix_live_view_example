@@ -21,10 +21,26 @@
   <%= file_input f, :avatar %>
   <%= error_tag f, :avatar %>
 
+  <%= assigns[:avatar_progress] %>
+  <progress max="100" value="<%= assigns[:avatar_progress] || 0 %>"></progress>
+
   <%= if assigns[:avatar] do %>
     <h2><%= @avatar["name"] %></h2>
     <h2><%= @avatar["type"] %></h2>
     <img src="data:<%= @avatar["type"] %>;base64, <%= File.read!(@avatar["path"]) |> Base.encode64() %>" />
+  <% end %>
+
+  <%= label f, :other %>
+  <%= file_input f, :other %>
+  <%= error_tag f, :other %>
+
+  <%= assigns[:other_progress] %>
+  <progress max="100" value="<%= assigns[:other_progress] || 0 %>"></progress>
+
+  <%= if assigns[:other] && assigns[:other]["name"] do %>
+    <h2><%= @other["name"] %></h2>
+    <h2><%= @other["type"] %></h2>
+    <img src="data:<%= @other["type"] %>;base64, <%= File.read!(@other["path"]) |> Base.encode64() %>" />
   <% end %>
 
   <div>
