@@ -1,43 +1,43 @@
-<%= form_for @changeset, "#", [phx_change: :validate, phx_submit: :save, multipart: true], fn f -> %>
+<%= @form %>
   <%= if @changeset.action do %>
     <!-- <div class="alert alert-danger"> -->
     <!--   <p>Oops, something went wrong! Please check the errors below.</p> -->
     <!-- </div> -->
   <% end %>
 
-  <%= label f, :username %>
-  <%= text_input f, :username %>
-  <%= error_tag f, :username %>
+  <%= label @form, :username %>
+  <%= text_input @form, :username %>
+  <%= error_tag @form, :username %>
 
-  <%= label f, :email %>
-  <%= text_input f, :email %>
-  <%= error_tag f, :email %>
+  <%= label @form, :email %>
+  <%= text_input @form, :email %>
+  <%= error_tag @form, :email %>
 
-  <%= label f, :phone_number %>
-  <%= text_input f, :phone_number %>
-  <%= error_tag f, :phone_number %>
+  <%= label @form, :phone_number %>
+  <%= text_input @form, :phone_number %>
+  <%= error_tag @form, :phone_number %>
 
-  <%= label f, :avatar %>
-  <%= file_input f, :avatar %>
-  <%= error_tag f, :avatar %>
+  <%= label @form, :avatar %>
+  <%= file_input @form, :avatar %>
+  <%= error_tag @form, :avatar %>
 
-  <%= assigns[:avatar_progress] %>
-  <progress max="100" value="<%= assigns[:avatar_progress] || 0 %>"></progress>
+  <h3><%= @avatar_progress %><h3>
+<progress max="100" style="width: 400px; height: 50px;" value="<%= assigns[:avatar_progress] || 0 %>"></progress>
 
-  <%= if assigns[:avatar] do %>
+  <%= if @avatar do %>
     <h2><%= @avatar["name"] %></h2>
     <h2><%= @avatar["type"] %></h2>
     <img src="data:<%= @avatar["type"] %>;base64, <%= File.read!(@avatar["path"]) |> Base.encode64() %>" />
   <% end %>
 
-  <%= label f, :other %>
-  <%= file_input f, :other %>
-  <%= error_tag f, :other %>
+  <%= label @form, :other %>
+  <%= file_input @form, :other %>
+  <%= error_tag @form, :other %>
 
-  <%= assigns[:other_progress] %>
-  <progress max="100" value="<%= assigns[:other_progress] || 0 %>"></progress>
+  <h3><%= @other_progress %><h3>
+  <progress max="100" style="width: 400px; height: 50px;" value="<%= assigns[:other_progress] || 0 %>"></progress>
 
-  <%= if assigns[:other] && assigns[:other]["name"] do %>
+  <%= if @other && @other["name"] do %>
     <h2><%= @other["name"] %></h2>
     <h2><%= @other["type"] %></h2>
     <img src="data:<%= @other["type"] %>;base64, <%= File.read!(@other["path"]) |> Base.encode64() %>" />
@@ -46,4 +46,4 @@
   <div>
     <%= submit "Save", phx_disable_with: "Saving..." %>
   </div>
-<% end %>
+</form>

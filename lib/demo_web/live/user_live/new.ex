@@ -8,11 +8,12 @@ defmodule DemoWeb.UserLive.New do
 
   def mount(_session, socket) do
     {:ok,
-     assign(socket, %{
+     assign(assign_changeset(socket, Accounts.change_user(%User{})), %{
        count: 0,
        avatar_progress: 0,
        other_progress: 0,
-       changeset: Accounts.change_user(%User{})
+       other: nil,
+       avatar: nil
      })}
   end
 
@@ -24,7 +25,7 @@ defmodule DemoWeb.UserLive.New do
       |> Demo.Accounts.change_user(params)
       |> Map.put(:action, :insert)
 
-    {:noreply, assign(socket, changeset: changeset)}
+    {:noreply, assign_changeset(socket, changeset)}
   end
 
   def handle_event("upload_progress", %{"user" => %{"avatar" => avatar}}, socket) do
@@ -48,7 +49,13 @@ defmodule DemoWeb.UserLive.New do
          |> redirect(to: Routes.live_path(socket, UserLive.Show, user))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, changeset: changeset, avatar: user_params["avatar"], other: user_params["other"])}
+        socket = assign_changeset(socket, changeset)
+        {:noreply, assign(socket, avatar: user_params["avatar"], other: user_params["other"])}
     end
+  end
+
+  def assign_changeset(socket, changeset) do
+    form = Phoenix.HTML.Form.form_for(changeset, "#", [phx_change: :validate, phx_submit: :save, multipart: true])
+    assign(socket, %{changeset: changeset, form: form})
   end
 end
